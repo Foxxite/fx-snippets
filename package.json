@@ -1,0 +1,26 @@
+{
+	"publisher": "Foxxite",
+	"name": "fx-snippets",
+	"displayName": "Foxxite Core Snippets",
+	"description": "Code snippets for the FXCore and resources",
+	"version": "0.0.1",
+	"icon": "images/logo.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Foxxite/fx-snippets.git"
+	},
+	"engines": {
+		"vscode": "^1.59.0"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"contributes": {
+		"snippets": [
+			{
+				"language": "lua",
+				"path": "./snippets/snippets.code-snippets"
+			}
+		]
+	}
+}

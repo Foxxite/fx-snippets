@@ -1,0 +1,121 @@
+{
+	"FXCore:Server": {
+		"prefix": ["fxcore:server", "fxcore:client"],
+		"body": ["FXCore = exports['fx-core']:GetCoreObject()", ""],
+		"description": "Code om de FXCore in te laden."
+	},
+	"FXCore:BaseEvents": {
+		"prefix": ["fxcore:baseevents", "onplayerloaded"],
+		"body": [
+			"FXCore = exports['fx-core']:GetCoreObject()",
+			"",
+			"local PlayerJob = {}",
+			"local isLoggedIn = false",
+			"",
+			"RegisterNetEvent('FXCore:Client:OnPlayerLoaded', function()",
+			"    isLoggedIn = true",
+			"    PlayerJob = FXCore.Functions.GetPlayerData().job",
+			"end)",
+			"",
+			"RegisterNetEvent('FXCore:Client:OnPlayerUnload', function()",
+			"    isLoggedIn = false",
+			"end)",
+			"",
+			"RegisterNetEvent('FXCore:Client:OnJobUpdate', function(JobInfo)",
+			"    PlayerJob = JobInfo",
+			"end)",
+			""
+		],
+		"description": "Client side code om de FXCore base events in te laden."
+	},
+
+	"Notify:Server": {
+		"prefix": ["notify:server"],
+		"body": ["TriggerClientEvent(\"FXCore:Notify\", source, \"${1:message}\", \"${2:type}\", 3500)", ""],
+		"description": "Server side code om een notificatie te tonen."
+	},
+	"Notify:Client": {
+		"prefix": ["notify:client", "FXCore.Functions."],
+		"body": ["FXCore.Functions.Notify(\"${1:message}\", \"${2:type}\")", ""],
+		"description": "Client side code om een notificatie te tonen."
+	},
+
+	"ShowHelp": {
+		"prefix": ["ShowHelp", "FXCore.Functions."],
+		"body": ["FXCore.Functions.ShowHelp(\"${1:message}\", \"${2:type}\")", ""],
+		"description": "Client side code ter vervanging voor DrawText3D."
+	},
+
+	"control:addcontrolablefield": {
+		"prefix": ["fx-control", "control", "fxcontrol", "addfield"],
+		"body": [
+			"exports[\"fx-control\"]:AddControlableField(GetCurrentResourceName(), '${1:name}', function() return ${2:Config.Cooldown} end, function(val) ${2:Config.Cooldown} = val end)",
+			""
+		],
+		"description": "Register een FX-EYE interaction"
+	},
+
+	"CreateCallback": {
+		"prefix": ["CreateCallback", "RegisterCallback", "FXCore.Functions.CreateCallback"],
+		"body": [
+			"FXCore.Functions.CreateCallback('fx-${1:ResourceName}:server:${2:CallbackName}', function(source, cb, ...)",
+			"    local src = source",
+			"    local Player = FXCore.Functions.GetPlayer(src)",
+			"",
+			"    cb(true)",
+			"end)",
+			""
+		],
+		"description": "Registreer een nieuwe callback"
+	},
+
+	"TriggerCallback": {
+		"prefix": ["TriggerCallback", "FXCore.Functions.TriggerCallback"],
+		"body": [
+			"FXCore.Functions.TriggerCallback('fx-${1:ResourceName}:server:${2:CallbackName}', function(retval)",
+			"    ${3}",
+			"end)",
+			""
+		],
+		"description": "Trigger een callback"
+	},
+
+	"CreateUseableItem": {
+		"prefix": "FXCore.Functions.CreateUseableItem",
+
+		"body": [
+			"FXCore.Functions.CreateUseableItem('${1:Item Naam}', function(source, item)",
+			"    local Player = FXCore.Functions.GetPlayer(source)",
+			"    if Player.Functions.RemoveItem(item.name, 1, item.slot) then",
+			"        TriggerClientEvent(\"${2:Resource Naam}:client:Use\", source)",
+			"    end",
+			"end)",
+			""
+		],
+		"description": "Makes an item useable."
+	},
+
+	"CommandAdd": {
+		"prefix": ["FXCore.Commands.Add", "Add", "Command", "RegisterCommand", "AddCommand"],
+
+		"body": [
+			"FXCore.Commands.Add('${1:Command Naam}', '${2:Command Desc}', {{name='${3:arg name}', help='${4:arg help}'}}, false, function(source, args)",
+			"",
+			"end, '${5:perm}')",
+			""
+		],
+		"description": "Register a new command."
+	},
+
+	"Player": {
+		"prefix": ["Player", "GetPlayer"],
+		"body": ["local Player = FXCore.Functions.GetPlayer(source)", ""],
+		"description": "Get the player object"
+	},
+
+	"LocalPlayer.state.isLoggedIn": {
+		"prefix": ["LocalPlayer.state.isLoggedIn", "isLoggedIn"],
+		"body": ["if LocalPlayer.state.isLoggedIn then", ""],
+		"description": "Is the player logged in?"
+	}
+}
