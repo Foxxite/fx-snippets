@@ -1,5 +1,5 @@
 <!-- @format -->
 
-# Nexus Snippets
+# FX Core Snippets
 
-Nexus Snippets is een extention voor het development team van Nexus.
+FX Core Snippets is een extention voor het development team van FXCore.
